@@ -1,30 +1,27 @@
 <template>
     <div class="AddTodo">
-        <transition name="fade">
-            <div class="v-popup">
-                <div class="v-popup-container">
-                    <div class="v-popup__header">
-                        <h3>Добавить нового пользователя</h3>
-                        <div class="v-close" v-on:click="closePopup">
-                            <span class="v-close-top"></span>
-                            <span class="v-close-bt"></span>
-                        </div>
+        <div class="v-popup">
+            <div class="v-popup-container">
+                <div class="v-popup__header">
+                    <h3>Добавить нового пользователя</h3>
+                    <div class="v-close" v-on:click="closePopup">
+                        <span class="v-close-top"></span>
+                        <span class="v-close-bt"></span>
                     </div>
-                    <div class="v-popup__content">
-                        <slot></slot>
-                        <div class="div">
-                            <form v-on:submit.prevent="onSubmit">
-                                <div class="wrp__input">
-                                    <el-input placeholder="Имя" v-model="name" v-bind:class="{error: isErrorEmail}"></el-input>
-                                    <el-input placeholder="Фамиия" v-model="lastName" v-bind:class="{error: isErrorPass}"></el-input>
-                                    <button type="submit">Добавить</button>
-                                </div>
-                            </form>
-                        </div>
+                </div>
+                <div class="v-popup__content">
+                    <div class="div">
+                        <form v-on:submit.prevent="onSubmit">
+                            <div class="wrp__input">
+                                <el-input placeholder="Имя" v-model="name" v-bind:class="{error: isErrorEmail}"></el-input>
+                                <el-input placeholder="Фамиия" v-model="lastName" v-bind:class="{error: isErrorPass}"></el-input>
+                                <button type="submit">Добавить</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </transition>
+        </div>
     </div>
 </template>
 
@@ -49,37 +46,20 @@
 
                 if(!checkErrorName && !checkErrorLastName) {
                     const newTodo = {
-                        // id: Date.now(),
                         avatar: "https://reqres.in/img/faces/3-image.jpg",
                         first_name: this.name,
                         last_name: this.lastName,
                         email: 'janet.weaver@reqres.in',
                         tel: '+ 7 909 546 77 88',
-                        completed: false
+                        completed: false,
+                        id: 12
                     };
                     this.$emit('add-todo', newTodo);
                     this.name = '';
                     this.lastName = '';
-
-                    // this.$emit('closePopup');
-                    console.log('Ураа');
                 } else {
                     console.log('отправка не возможна')
                 }
-                // if(this.name.trim() && this.lastName.trim()) {
-                //     const newTodo = {
-                //         // id: Date.now(),
-                //         avatar: "https://reqres.in/img/faces/3-image.jpg",
-                //         first_name: this.name,
-                //         last_name: this.lastName,
-                //         email: 'janet.weaver@reqres.in',
-                //         tel: '+ 7 909 546 77 88',
-                //         completed: false
-                //     }
-                //     this.$emit('add-todo', newTodo);
-                //     this.name = '';
-                //     this.lastName = '';
-                // }
             },
             closePopup() {
                 this.$emit('closePopup');
@@ -89,21 +69,13 @@
 </script>
 
 <style>
-    /*form {*/
-    /*    display: flex;*/
-    /*    justify-content: space-between;*/
-    /*    max-width: 60%;*/
-    /*    margin: 0 auto 10px auto;*/
-    /*}*/
     .wrp__input {
         display: flex;
         flex-direction: column;
         width: 70%;
         margin: 0 auto;
     }
-    input {
 
-    }
     button {
         border: 1px solid rgba(64, 64, 64, 0.2);
         border-radius: 4px;
@@ -124,10 +96,21 @@
         justify-content: flex-end;
     }
     .v-popup-container {
+        position: absolute;
+        z-index: 10;
         max-width: 450px;
+        left: calc(50% - 225px);
+        top: calc(50% - 280px);
+        background: rgba(255, 255, 255, 1);
         padding: 40px;
         border: 1px solid rgba(64, 64, 64, 0.2);
         border-radius: 4px;
+        -webkit-box-shadow: 0px 0px 25px 11px rgba(34, 60, 80, 0.5);
+        -moz-box-shadow: 0px 0px 25px 11px rgba(34, 60, 80, 0.5);
+        box-shadow: 0px 0px 25px 11px rgba(34, 60, 80, 0.5);
+    }
+    .AddTodo {
+        margin-bottom: 20px;
     }
 
     .v-popup__header {
@@ -176,5 +159,4 @@
     .v-close-bt {
         transform: rotate(-45deg);
     }
-
 </style>

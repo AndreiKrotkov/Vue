@@ -31,7 +31,7 @@
     .v-header {
         background: #F2F4F5;
         border-bottom: 2px solid #426AB2;
-
+        margin-bottom: 20px;
     }
     header {
         display: flex!important;

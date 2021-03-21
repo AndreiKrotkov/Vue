@@ -1,12 +1,12 @@
 <template>
-    <div class="">
+    <div class="v-loader">
         <div class="lds-dual-ring"></div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Loader"
+        name: "v-loader"
     }
 </script>
 

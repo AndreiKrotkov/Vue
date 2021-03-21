@@ -12,12 +12,12 @@ export default new Router({
             component: Home
         },
         {
-            path: "/todos",
-            component: () => import('./views/Todos.vue')
+            path: "/list-person",
+            component: () => import('./views/v-list-person.vue')
         },
         {
             path: "/cart",
-            component: () => import('./components/Cart.vue')
+            component: () => import('./views/Cart.vue')
         }
     ]
 })
