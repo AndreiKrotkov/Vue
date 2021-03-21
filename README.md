@@ -1,4 +1,7 @@
-# vue-new
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/AndreiKrotkov/Vue.git
+git push -u origin main# vue-new
 
 ## Project setup
 ```
