@@ -16,6 +16,11 @@
                         >Новый пользователь
                         </button>
                     </div>
+                    <div class="wrp_input">
+                        <label for="inputPerson"> Поле ввода
+                            <input type="text" v-model="searchPerson" id="inputPerson">
+                        </label>
+                    </div>
                     <AddTodo
                             v-on:add-todo="addTodo"
                             v-on:closePopup="closePopup"
@@ -24,7 +29,7 @@
                     <Loader v-if="loading" />
                     <TodoList
                             v-else-if="arrPerson.length"
-                            v-bind:cartItem="arrPerson"
+                            v-bind:cartItem="filterPerson"
                     />
                     <p v-else>Список пуст</p>
 
@@ -78,6 +83,7 @@ export default {
             ],
             isShow: false,
             popupActive: false,
+            searchPerson: ''
         }
     },
     mounted() {
@@ -89,6 +95,15 @@ export default {
     computed: {
         idPerson() {
             return this.arrPerson.map(el => el.id);
+        },
+        filterPerson() {
+            if(!this.searchPerson.length) {
+                return this.arrPerson;
+            } else {
+                return this.arrPerson.filter((el) => {
+                    return el.first_name.toLowerCase().indexOf(this.searchPerson.toLowerCase()) !== -1;
+                })
+            }
         }
     },
     components: {
@@ -136,9 +151,11 @@ export default {
                     this.arrPerson = json.data;
                     this.loading = false;
                     this.totalPages = json.total_pages;
-                })
+                }).catch((er) => {
+                console.log(er);
+            });
         },
-        // Функция на получение списка пользователей
+        // Функция на обновление списка пользователей
         updateUsers() {
             fetch('https://reqres.in/api/users?page='+this.pageNumber)
                 .then(response => response.json())
@@ -151,13 +168,27 @@ export default {
                             this.arrPerson.push(json.data[i])
                         }
                     }
-                })
-        }
+                }).catch((er) => {
+                    console.log(er);
+                });
+            }
     }
 }
 </script>
 
 <style>
+    .wrp_input {
+        text-align: end;
+        margin-bottom: 20px;
+    }
+    .wrp_input input {
+        border: 1px solid rgba(64, 64, 64, 0.2);
+        border-radius: 4px;
+    }
+    .wrp_input input:focus {
+        outline: none;
+        border: 1px solid #426AB2;
+    }
     .pagination {
         max-width: 600px;
         margin: 0 auto 120px auto;

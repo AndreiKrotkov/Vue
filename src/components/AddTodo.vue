@@ -41,8 +41,8 @@
                 console.log('submit', this.title);
                 let nameLenght = this.name.length;
                 let lastNameLenght = this.lastName.length;
-                let checkErrorName = nameLenght === 0  ? this.isErrorEmail = true : this.isErrorEmail = false;
-                let checkErrorLastName = lastNameLenght === 0  ? this.isErrorPass = true : this.isErrorPass = false;
+                let checkErrorName = nameLenght === 0 ? this.isErrorEmail = true : this.isErrorEmail = false;
+                let checkErrorLastName = lastNameLenght === 0 ? this.isErrorPass = true : this.isErrorPass = false;
 
                 if(!checkErrorName && !checkErrorLastName) {
                     const newTodo = {
