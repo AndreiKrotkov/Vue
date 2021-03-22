@@ -101,7 +101,7 @@ export default {
                 return this.arrPerson;
             } else {
                 return this.arrPerson.filter((el) => {
-                    return el.first_name.toLowerCase().indexOf(this.searchPerson.toLowerCase()) !== -1;
+                    return el.first_name.toLowerCase().indexOf(this.searchPerson.toLowerCase()) !== -1 || el.last_name.toLowerCase().indexOf(this.searchPerson.toLowerCase()) !== -1;
                 })
             }
         }
